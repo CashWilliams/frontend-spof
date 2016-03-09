@@ -4,14 +4,9 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print">
 
     <title>Frontend-SPOF Demo by CashWilliams</title>
   </head>
@@ -19,8 +14,8 @@
   <body>
     <header>
       <div class="inner">
-        <h1>Frontend-SPOF Demo</h1>
-        <h2>Demo of Frontend SPOF issues and fixes.</h2>
+        <h1>Frontend-SPOF</h1>
+        <h2>Examples of Frontend SPOF</h2>
         <a href="https://github.com/CashWilliams/frontend-spof" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -29,28 +24,75 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="frontend-spof" class="anchor" href="#frontend-spof" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>frontend-spof</h1>
+            <a id="frontend-spof" class="anchor" href="#frontend-spof" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Frontend SPOF
+          </h1>
+          <p>
+            This site serves as a demo of different <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">Frontend SPOF</a> issues and how to fix them.
+          </p>
 
-<p>This site serves as a demo of different <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">Frontend SPOF</a> issues and how to fix them.</p>
+          <h2>
+            <a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Show Me the Examples!
+          </h2>
+          <ul>
+            <li><a href="examples/blocking/twitter.html">Twitter Widget</a></li>
+            <li><a href="examples/blocking/font.html">Web Font</a></li>
+          </ul>
+
+          <h2>
+            <a id="definition" class="anchor" href="#definition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is Frontend SPOF?
+          </h2>
+          <p>
+            The earliest reference to the term Frontend SPOF I can find is by Steve Sounders in 2010, in
+            his <a href="http://www.stevesouders.com/blog/2010/06/01/frontend-spof/">blog post</a> about
+            the topic. This topic deals optiming webpage rendering in at the browser level and how assets
+            are requested and rendered. The simplest form of the issue can be described as:
+
+            <blockquote>
+              Requiring a third party asset which that render blocking.
+            </blockquote>
+
+            This third party asset can be anything, such as CSS, JavaScript, or Fonts, so long as the
+            browser considers that asset part of the <a href="https://www.youtube.com/watch?v=YV1nKLWoARQ">critical rendering path</a>.
+
+            <blockquote>
+              If for any reason the browser cannot load a critical asset, to the user, your site is effectively down.
+            </blockquote>
+
+            The problem with critical third party assets is of course, you have no control over them. The third party could
+            decide to remove the asset, the site could be overloaded or down, or something could be blocking access to the
+            third party server. For instance, it is not uncommon for a corporate firewall to block access to social networks
+            such as Facebook and Twitter. If your site includes social widgets in a critical manner, the site may not work
+            users who have restricted access to the web.
+            </thead>
+          </p>
+          <h2>
+            <a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing for SPOF
+          </h2>
+          <p>
+            There are a few different methods of testing for Frontend SPOF.
+            <ul>
+              <li><a href="http://www.webpagetest.org">www.webpagetest.org</a> provides the Google Chrome extension <a href="https://chrome.google.com/webstore/detail/spof-o-matic/plikhggfbplemddobondkeogomgoodeg">SPOF-O-Matic</a>.
+                This extension adds a small button in Chrome's toolbar which will show how many likely third-pary SPOF assets are on a page. It also provides
+                a method of simulating the resources being unavailable.
+              </li>
+              <li><a href="http://www.webpagetest.org">www.webpagetest.org</a> also provides a method of testing Frontend SPOF on it's site. When starting a new test,
+                the SPOF tab can be used to provide domains which should be unavaiable.
+              </li>
+              <li><a href="http://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html">blackhole.webpagetest.org</a> can also be used point domains to an unreachable server.
+                This is useful for local testing if you can edit your <code>hosts</code> file.
+              </li>
+              <li><a href="http://senthilp.github.io/spofcheck/">SPOFCheck</a> is a command line tool built in Node.js which detects possible Frontend SPOF assets.
+              </li>
+            </ul>
+          </p>
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/CashWilliams/frontend-spof/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/CashWilliams/frontend-spof/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/CashWilliams/frontend-spof"></a> is maintained by <a href="https://github.com/CashWilliams">CashWilliams</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+          <p class="repo-owner"><a href="https://github.com/CashWilliams/frontend-spof">Frontend SPOF Demo</a> is maintained by <a href="https://github.com/CashWilliams">CashWilliams</a>.</p>
+          <p>This page was originally generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>. (But I've hacked it up quite a bit since then)</p>
         </aside>
       </div>
     </div>
 
-  
   </body>
 </html>
