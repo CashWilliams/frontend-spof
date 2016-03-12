@@ -4,7 +4,19 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Architects+Daughter::latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })();
+    </script>
     <link rel="stylesheet" type="text/css" href="../../stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/print.css" media="print">
@@ -28,10 +40,10 @@
             <a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Web Font SPOF
           </h1>
           <p>
-            The original version of this site was made with <a href="https://pages.github.com">GitHub Pages</a>
-            using the Architect theme. On most pages, the custom Google Web Font <a href="https://www.google.com/fonts/specimen/Architects+Daughter">Architects Daughter</a>
-            was removed. However this page still contains the CSS link which loads it.
-            Loading the font in this way causes the browser to <em>wait</em> for the CSS file to be loaded from <a href="https://fonts.googleapis.com">https://fonts.googleapis.com</a>.
+            Google's documentation on their <a href="https://www.google.com/fonts">Web Font</a> site contains three methods
+            of including a font. The third method is a JavaScript only them that loads the font file after the page has rendered.
+            This method does come with the downside that the browser will display the text without the font, and then re-render
+            the text once the font file has downloaded.
           </p>
 
           <h2>
@@ -48,16 +60,36 @@
               <a id="code" class="anchor" href="#code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Code
           </h2>
           <p>
-            <a href="https://www.google.com/fonts#QuickUsePlace:quickUse">Google Fonts' documentation</a> offer three methods of including a font.
-            The 'Standard' method is used in this case, which is to include a &lt;link&gt; tag in the &lt;head&gt; section of the HTML.
+            The basic idea is to load the font asynchronously. There are a few methods of achiving this.
+            <a href="https://www.google.com/fonts#QuickUsePlace:quickUse">Google Fonts' documentation</a> offers a JavaScript method
+            of including their fonts, which is how this page is constructed. Using this method, the browser must have JavaScript enabled.
+            The following code can be found in the <code>&lt;head&gt;</code> tag of this page:
           </p>
           <p>
-            <pre>&lt;link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'&gt;</pre>
+            <pre>
+&lt;script type="text/javascript"&gt;
+  WebFontConfig = {
+    google: { families: [ 'Architects+Daughter::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+})();
+&lt;/script&gt;
+            </pre>
           </p>
           <p>
-            Using this method, the browser has assumes the CSS (or font) is needed to rendering the page, which is probably a valid
-            assumption from the designer's perspective. However, if the choice is between seeing the without the custom font or not seeing
-            the site at all, it stands to reason the font is <em>not essential</em>.
+            An alternative method is to use the <a href="https://www.w3.org/TR/2015/WD-preload-20150721/"><code>preload</code> value in the rel attribute</a> of the <code>&lt;link&gt;</code> tag.
+            However, not all browsers support this method yet, which is why the polyfill <a href="https://github.com/filamentgroup/loadCSS">loadCSS</a> was built.
+            The loadCSS site contains documentation for installation and methods of use.
+          </p>
+          <p>
+            <strong>Note:</strong> The recommended <a href="https://chrome.google.com/webstore/detail/spof-o-matic/plikhggfbplemddobondkeogomgoodeg">SPOF-O-Matic</a> Chrome extenstion
+            will still show any CSS files using this alternative method as SPOF, they are not however.
           </p>
           <h2>
               <a id="video" class="anchor" href="#video" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Video
@@ -69,15 +101,6 @@
               <source src="../../images/spof_font_video.mp4" type="video/mp4">
               Your browser does not support the <code>video</code> tag, you can try to view the video <a href="http://www.webpagetest.org/video/view.php?id=160309_221353853036ba659cd2474042e330679171571d">here</a>.
             </video>
-          </p>
-          <h2>
-              <a id="fix" class="anchor" href="#fix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Fix
-          </h2>
-          <p>
-
-          </p>
-          <p>
-            See the fixed version of this page <a href="../nonblocking/font.html">here</a>.
           </p>
         </section>
 
