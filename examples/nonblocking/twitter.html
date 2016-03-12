@@ -8,8 +8,6 @@
     <link rel="stylesheet" type="text/css" href="../../stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="../../stylesheets/print.css" media="print">
 
-    <script src="https://platform.twitter.com/widgets.js"></script>
-
     <title>Frontend-SPOF Demo by CashWilliams</title>
   </head>
 
@@ -30,11 +28,10 @@
           </h1>
           <p>
             This page includes a typical twitter share widget, in this case a <a href="https://dev.twitter.com/web/tweet-button">Tweet Button</a>,
-            included in a manner that causes the browser to <em>wait</em> for the JavaScript provided by <a href="https://twitter.com">Twitter.com</a>.
+            properly loading asynchronously from <a href="https://dev.twitter.com/web/javascript/loading">Twitter's documentation</a>.
           </p>
           <p>
-            <strong>Note:</strong> This method of including the Tween Button is done incorrectly on purpose. Twitter's documentation describes how to correctly
-            load the JavaScript <a href="https://dev.twitter.com/web/javascript/loading">asynchronously</a>.
+            Compare this page to the SPOF example <a href="../blocking/twitter.html">here</a>.
           </p>
 
           <h2>
@@ -55,38 +52,38 @@
             <pre>&lt;a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world" data-size="large"&gt;Tweet&lt;/a&gt;</pre>
           </p>
           <p>
-            Incuding the JavaScript is where the problem comes in. The standard method of including external JavaScript is to simply place a
-            <code>&lt;script&gt;</code> tag in the <code>&lt;head&gt;</code> section of the HTML. This is the method the widgets.js file is
-            included on this page:
+            Follow Twitters documentation and add the following code to the page:
           </p>
           <p>
-            <pre>&lt;script src="https://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;</pre>
-          </p>
-          <p>
-            Using this method, the browser has no idication if this JavaScript is <em>fundamental</em> to rendering the page. The browser
-            has to assume the page cannot function without this JavaScript, which <em>would</em> be the case if this file were something like
-            <a href="http://jquery.com/">jQuery</a> or <a href="https://angularjs.org/">AngularJS</a>.
+            <pre>
+&lt;script&gt;window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));&lt;/script&gt;
+            </pre>
           </p>
           <h2>
               <a id="video" class="anchor" href="#video" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Video
           </h2>
           <p>
             Here is a video simulating what a user who cannot access <code>platform.twitter.com</code> would see when loading this page.
-          </p>
           <p>
             <video controls>
               <source src="../../images/spof_twitter_video.mp4" type="video/mp4">
               Your browser does not support the <code>video</code> tag, you can try to view the video <a href="http://www.webpagetest.org/video/view.php?id=160309_d0dd4caf3f9dde59d2386ef4656c9ef64dae73dd">here</a>.
             </video>
-          </p>
-          <h2>
-              <a id="fix" class="anchor" href="#fix" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Fix
-          </h2>
-          <p>
-            As mentioned at the top of the page, <a href="https://dev.twitter.com/web/javascript/loading">Twitter's documentation</a> details how to load their script asynchronously.
-          </p>
-          <p>
-            See the fixed version of this page <a href="../nonblocking/twitter.html">here</a>.
           </p>
         </section>
 
@@ -104,6 +101,23 @@
         </aside>
       </div>
     </div>
+
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));</script>
 
   </body>
 </html>
