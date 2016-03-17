@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Frontend SPOF - CashWilliams</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Frontend SPOF</h1>
+					<p>
+						<small>By: <a href="https://cashwilliams.com">Cash Williams</a> / <a href="http://twitter.com/cashwilliams">@cashwilliams</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Single Point of Failure</h2>
+					<blockquote>
+						A part of a system that, if it fails, will stop the entire system from working.
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>SPOF IRL</h2>
+					<p>
+						SPOF typically easy to identify.
+					</p>
+				</section>
+
+				<section data-background="./img/chains.jpg">
+					<blockquote style="background: grey"><h2>Chains.</h2></blockquote>
+				</section>
+
+				<section data-background="./img/crane_1.jpg">
+				</section>
+
+				<section data-background="./img/crane_2.jpg">
+				</section>
+
+				<section data-background="./img/crane_3.jpg">
+				</section>
+
+				<section>
+					<h2>SPOF IRL</h2>
+					SPOF typically easy to identify (for the most part).
+				</section>
+
+				<section data-background="./img/crane_fall_1.jpg">
+				</section>
+
+				<section data-background="./img/crane_fall_2.jpg">
+				</section>
+
+				<section data-background="./img/crane_fall_3.jpg">
+				</section>
+
+				<section>
+					<h2>SPOF on Web</h2>
+					<p>
+						The Web is built to withstand failure.
+					</p>
+				</section>
+
+				<section>
+					<h2>High Availability</h2>
+					<img width="424" height="503" data-src="./img/multi_server.jpg" alt="HA Servers">
+				</section>
+
+				<section>
+					<h2>High Availability</h2>
+					<img width="403" height="525" data-src="./img/multi_server_fail.jpg" alt="HA Servers">
+				</section>
+
+				<section>
+					<h2>Frontend SPOF</h2>
+					<p>
+						How web browsers work...
+					</p>
+				</section>
+
+				<section>
+					<h2>Browser Render Flow</h2>
+					<img width="819" height="477" data-src="./img/browser_flow_1.png" alt="Browser Flow">
+				</section>
+
+				<section>
+					<h2>Tweet It!</h2>
+					<img width="88" height="41" data-src="./img/tweet_button.jpg" alt="Tweet Button">
+				</section>
+
+				<section>
+					<h2>Tweet It!</h2>
+					<p>We add some javascript at the top...</p>
+					<pre><code class="hljs" data-trim contenteditable>
+&lt;script src="https://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;
+					</code></pre>
+					<p>And some HTML in the page...</p>
+					<pre><code class="html" data-trim contenteditable>
+&lt;a class="twitter-share-button" href="https://twitter.com/[...]"&gt;Tweet&lt;/a&gt;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Browser Render Flow</h2>
+					<img width="924" height="477" data-src="./img/browser_flow_2.png" alt="Browser Flow">
+				</section>
+
+				<section>
+					<h2>Frontend SPOF</h2>
+					<img width="924" height="477" data-src="./img/browser_flow_3.png" alt="Browser SPOF">
+				</section>
+
+				<section>
+					<h2>Frontend SPOF Twitter Video</h2>
+					<video controls>
+						<source src="./img/spof_twitter_video.mp4" type="video/mp4">
+							Your browser does not support the <code>video</code> tag, you can try to view the video <a href="http://www.webpagetest.org/video/view.php?id=160309_d0dd4caf3f9dde59d2386ef4656c9ef64dae73dd">here</a>.
+						</video>
+				</section>
+
+				<section>
+					<h2>So now what?</h2>
+				</section>
+
+				<section data-background="./img/confused.gif">
+				</section>
+
+				<section>
+					<h2>Tell the Browser</h2>
+					<blockquote>
+						"These items are not important."
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Async Attribute on Script Tag</h2>
+					<p>HTML5 only</p>
+					<pre><code class="hljs" data-trim contenteditable>
+&lt;script async src="https://platform.twitter.com/widgets.js"&gt;&lt;/script&gt;
+					</code/></pre>
+				</section>
+
+				<section>
+					<h2>Asynchronous Loading JS</h2>
+					<p>Pre-HTML5</p>
+					<pre><code class="hljs" data-trim contenteditable>
+&lt;script&gt;window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));&lt;/script&gt;
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>rel=preload on Link Tag</h2>
+					<pre><code>
+&lt;link rel="preload" href="[...]" as="style" onload="this.rel='stylesheet'"&gt;
+&lt;noscript&gt;&lt;link rel="stylesheet" href="[...]"&gt;&lt;/noscript&gt;
+					</code></pre>
+					<p>Stuff like Font Awesome can wait.</p>
+					<p><a href="https://github.com/filamentgroup/loadCSS/">loadCSS</a> polyfill</p>
+				</section>
+
+				<section>
+					<h2>Lastly, Put it at the Bottom</h2>
+					<p>
+						Browser will <em>try</em> to render everything until the point it gets blocked.
+					</p>
+				</section>
+
+				<section>
+					<h2>Testing for Frontend SPOF</h2>
+				</section>
+
+				<section>
+					<h2>SPOF-O-Matic</h2>
+					<p>
+						<a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjPpPq_yrnLAhWjvYMKHXRrBAQQFggdMAA&url=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fspof-o-matic%2Fplikhggfbplemddobondkeogomgoodeg%3Fhl%3Den-US&usg=AFQjCNG0vWMP7am9RRsjhH8LMjNDWYhEFw&sig2=cJtJ97lgs_qKtYnZnZE7oA">Chrome Web Store</a>
+					</p>
+					<p>
+						<img width="54" height="40" data-src="./img/spof_o_matic.jpg" alt="SPOF-O-Matic screenshot">
+					</p>
+					<p>
+						<ul>
+							<li>Test locally in Chrome.</li>
+							<li>Simulate blocked 3rd Party sites.</li>
+							<li>Provides link to next tool...</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>WebPageTest.org</h2>
+					<p>
+						<a href="http://www.webpagetest.org">http://www.webpagetest.org</a>
+					</p>
+					<p>
+						<img width="742" height="545" data-src="./img/webpagetest.jpg" alt="WebPageTest.org screenshot">
+					</p>
+					<p>
+						<ul>
+							<li>Test remotely using different browsers.</li>
+							<li>Blocked list of 3rd Party sites.</li>
+							<li>Produces video and waterfalls.</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>Blackhole.WebPageTest.org</h2>
+					<p>
+					Test locally with Hosts file:
+					</p>
+					<p>
+						<pre><code class="bash" data-trim contenteditable>
+							72.66.115.13 platform.twitter.com
+						</code></pre>
+					</p>
+					<p>
+					(Just don't forget to take it out.)
+					</p>
+				</section>
+
+				<section>
+					<h2>spofcheck</h2>
+					<p>
+						<a href="http://senthilp.github.io/spofcheck/">senthilp.github.io/spofcheck</a>
+					</p>
+					<p>
+						<pre><code class="bash" data-trim contenteditable>
+							$ npm install -g spofcheck
+						</code></pre>
+					</p>
+					<p>
+						<ul>
+							<li>Test locally or CI with CLI.</li>
+						</ul>
+					</p>
+				</section>
+
+				<section>
+					<h2>SpeedCurve</h2>
+					<p>
+						<a href="https://speedcurve.com">SpeedCurve</a> is a cloud SaaS that monitors your site's frontend performance.
+					</p>
+					<p>
+						<img width="1390" height="745" data-src="./img/speedcurve.jpg" alt="SpeedCurve Screenshot">
+					</p>
+				</section>
+
+				<section>
+					<h2>Demo Site</h2>
+					<p>
+						<a href="http://cashwilliams.github.io/frontend-spof/">cashwilliams.github.io/frontend-spof</a>
+					</p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: false,
+				history: true,
+				center: true,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
